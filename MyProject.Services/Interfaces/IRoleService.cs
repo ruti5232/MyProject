@@ -16,7 +16,7 @@ namespace MyProject.Services.Interfaces
 
         public RoleDTO Add(int id, string name, string description);
 
-        public RoleDTO Update(Role roleDTO);
+        public RoleDTO Update(RoleDTO roleDTO);
 
         public void Delete(int id);
 

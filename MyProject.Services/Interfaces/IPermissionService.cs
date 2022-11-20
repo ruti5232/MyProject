@@ -16,7 +16,7 @@ namespace MyProject.Services.Interfaces
 
         public PermissionDTO Add(int id, string name, string description);
 
-        public PermissionDTO Update(Permission roleDTO);
+        public PermissionDTO Update(PermissionDTO roleDTO);
 
         public void Delete(int id);
 

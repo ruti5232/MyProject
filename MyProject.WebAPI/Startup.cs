@@ -48,9 +48,9 @@ namespace MyProject.WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyProject.WebAPI", Version = "v1" });
             });
             services.AddAutoMapper(typeof(Mapping));
-            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IRoleService, Roleservice>();
             services.AddScoped<IPermissionService, PermissionService>();
-            services.AddScoped<IClaimService, ClaimService>();
+            services.AddScoped<IClaimService, Claimservice>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IPermissionRepository, PermissionRepository>();
             services.AddScoped<IClaimRepository, ClaimRepository>();

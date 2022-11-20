@@ -41,9 +41,9 @@ namespace MyProject.Services.Sevices
             return _mapper.Map < List<PermissionDTO>>(_permissionRepository.GetAll());
         }
 
-        public PermissionDTO Update(Permission roleDTO)
+        public PermissionDTO Update(PermissionDTO roleDTO)
         {
-            return _mapper.Map<PermissionDTO>(_permissionRepository.Update(roleDTO));
+            return _mapper.Map<PermissionDTO>(_permissionRepository.Update(_mapper.Map < Permission > (roleDTO)));
         }
     }
 }

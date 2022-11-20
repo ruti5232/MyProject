@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //using Claim = MyProject.Repositories.Entities.Claim;
+
 namespace MyProject.Services.Sevices
 {
     public class Claimservice : IClaimService
@@ -24,7 +25,7 @@ namespace MyProject.Services.Sevices
 
         public ClaimDTO Add(int id, int roleId, int permissionId, Common.DTOs.EPolicy policy)
         {
-            return _mapper.Map<ClaimDTO>(_claimRepository.Add(id,roleId,permissionId,policy));
+            return _mapper.Map<ClaimDTO>(_claimRepository.Add(id,roleId,permissionId,(Repositories.Entities.EPolicy)policy));
         }
 
         public void Delete(int id)
@@ -42,9 +43,11 @@ namespace MyProject.Services.Sevices
             return _mapper.Map<List<ClaimDTO>>(_claimRepository.GetAll());
         }
 
-        public ClaimDTO Update(Claim claim)
+        public ClaimDTO Update(ClaimDTO claim)
         {
-            return _mapper.Map<ClaimDTO>(_claimRepository.Update(claim));
+            return _mapper.Map<ClaimDTO>(_claimRepository.Update(_mapper.Map<Claim>(claim)));
         }
+
+        
     }
 }

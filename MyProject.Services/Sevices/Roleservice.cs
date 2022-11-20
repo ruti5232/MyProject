@@ -41,9 +41,9 @@ namespace MyProject.Services.Sevices
             return _mapper.Map<List<RoleDTO>>(_roleRepository.GetAll());
         }
 
-        public RoleDTO Update(Role roleDTO)
+        public RoleDTO Update(RoleDTO roleDTO)
         {
-            return _mapper.Map<RoleDTO>(_roleRepository.Update(roleDTO));
+            return _mapper.Map<RoleDTO>(_roleRepository.Update(_mapper.Map<Role>(roleDTO)));
         }
 
     }
