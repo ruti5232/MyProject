@@ -1,4 +1,5 @@
-﻿using MyProject.Repositories.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MyProject.Repositories.Entities;
 using MyProject.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,33 +16,35 @@ namespace MyProject.Repositories.Repositories
         {
             _context = context;
         }
-        public Permission Add(int id, string name, string description)
+        public async Task<Permission> AddAsync(int id, string name, string description)
         {
-            Permission p = new Permission { Id = id, Name = name, Description = description };
-            _context.Permissions.Add(p);
-            return p;
+            var added = _context.Permissions.Add(new Permission { Id = id, Name = name, Description = description });
+            await _context.SaveChangesAsync();
+            return added.Entity;
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            _context.Permissions.Remove(GetById(id));
+            _context.Permissions.Remove(_context.Permissions.Find(id));
+            await _context.SaveChangesAsync();
         }
 
-        public List<Permission> GetAll()
+        public async Task<List<Permission>> GetAllAsync()
         {
-            return _context.Permissions;
+            return await _context.Permissions.ToListAsync();
         }
 
-        public Permission GetById(int id)
+        public async Task<Permission> GetByIdAsync(int id)
         {
-            return _context.Permissions.Find(p => p.Id == id);
+            return await _context.Permissions.FindAsync(id);
         }
 
-        public Permission Update(Permission Permission)
+        public async Task<Permission> UpdateAsync(Permission permission)
         {
-            var p1=_context.Permissions.Find(p => p.Id == Permission.Id);
-            p1.Name = Permission.Name;
-            p1.Description = Permission.Description;
+            var p1 = _context.Permissions.Find(permission.Id);
+            p1.Name = permission.Name;
+            p1.Description = permission.Description;
+            await _context.SaveChangesAsync();
             return p1;
         }
     }

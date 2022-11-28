@@ -11,14 +11,14 @@ namespace MyProject.Services.Interfaces
 {
     public interface IClaimService
     {
-        public List<ClaimDTO> GetList();
+        public Task<List<ClaimDTO>> GetListAsync();
 
-        public ClaimDTO GetById(int id);
+        public Task<ClaimDTO> GetByIdAsync(int id);
 
-        public ClaimDTO Add(int id, int roleId, int permissionId, EPolicy policy);
+        public Task<ClaimDTO> AddAsync(int id, int roleId, int permissionId, EPolicy policy);
 
-        public ClaimDTO Update(ClaimDTO claim);
+        public Task<ClaimDTO> UpdateAsync(ClaimDTO claim);
 
-        public void Delete(int id);
+        public Task DeleteAsync(int id);
     }
 }

@@ -10,15 +10,15 @@ namespace MyProject.Services.Interfaces
 {
     public interface IRoleService
     {
-        List<RoleDTO> GetList();
+        Task<List<RoleDTO>> GetListAsync();
 
-        RoleDTO GetById(int id);
+        Task<RoleDTO> GetByIdAsync(int id);
 
-        public RoleDTO Add(int id, string name, string description);
+        public Task<RoleDTO> AddAsync(int id, string name, string description);
 
-        public RoleDTO Update(RoleDTO roleDTO);
+        public Task<RoleDTO> UpdateAsync(RoleDTO roleDTO);
 
-        public void Delete(int id);
+        public Task DeleteAsync(int id);
 
     }
 }

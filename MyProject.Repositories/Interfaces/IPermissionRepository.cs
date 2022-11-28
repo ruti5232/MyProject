@@ -9,15 +9,15 @@ namespace MyProject.Repositories.Interfaces
 {
     public interface IPermissionRepository
     {
-        public List<Permission> GetAll();
+        public Task<List<Permission>> GetAllAsync();
 
-        public Permission GetById(int id);
+        public Task<Permission> GetByIdAsync(int id);
 
-        public Permission Add(int id, string name, string description);
+        public Task<Permission> AddAsync(int id, string name, string description);
 
-        public Permission Update(Permission permission);
+        public Task<Permission> UpdateAsync(Permission permission);
 
-        public void Delete(int id);
+        public Task DeleteAsync(int id);
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using MyProject.Repositories.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MyProject.Repositories.Entities;
 using MyProject.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,35 +16,36 @@ namespace MyProject.Repositories.Repositories
         {
             _context = context;
         }
-
-        public Claim Add(int id, int roleId, int permissionId, EPolicy policy)
+        public async Task<Claim> AddAsync(int id,int roleId,int permissionId,EPolicy policy)
         {
-            Claim c = new Claim { Id = id, RoleId = roleId, PermissionId = permissionId, Policy = policy };
-            _context.Claims.Add(c);
-            return c;
+            var added = _context.Claims.Add(new Claim { Id = id,RoleId=roleId,PermissionId=permissionId,Policy=policy });
+            await _context.SaveChangesAsync();
+            return added.Entity;
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            _context.Claims.Remove(GetById(id));
+            _context.Claims.Remove(_context.Claims.Find(id));
+            await _context.SaveChangesAsync();
         }
 
-        public List<Claim> GetAll()
+        public async Task<List<Claim>> GetAllAsync()
         {
-            return _context.Claims;
+            return await _context.Claims.ToListAsync();
         }
 
-        public Claim GetById(int id)
+        public async Task<Claim> GetByIdAsync(int id)
         {
-            return _context.Claims.Find(c => c.Id == id);
+            return await _context.Claims.FindAsync(id);
         }
 
-        public Claim Update(Claim claim)
+        public async Task<Claim> UpdateAsync(Claim claim)
         {
-            var c1 = _context.Claims.Find(c => c.Id == claim.Id);
+            var c1 = _context.Claims.Find(claim.Id);
             c1.RoleId = claim.RoleId;
             c1.PermissionId = claim.PermissionId;
             c1.Policy = claim.Policy;
+            await _context.SaveChangesAsync();
             return c1;
         }
     }

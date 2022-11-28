@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MyProject.Mock
 {
-    public class MockContext : IContext
+    public class MockContext //: IContext
     {
         public List<Role> Roles { get ; set ; }
         public List<Permission> Permissions { get; set ; }

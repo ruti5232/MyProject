@@ -25,16 +25,41 @@ namespace MyProject.WebAPI.Controllers
 
         [HttpGet]
 
-        public List<Permission>Get()
+        public async Task<List<Permission>> Get()
         {
-            return _permissionRepository.GetAll();
+            return await _permissionRepository.GetAllAsync();
         }
 
         [HttpGet("{id}")]
 
-        public Permission Get(int id)
+        public async Task<Permission> Get(int id)
         {
-            return _permissionRepository.GetById(id);
+            return await _permissionRepository.GetByIdAsync(id);
         }
+
+        [HttpDelete("{id}")]
+
+        public async Task Delete(int id)
+        {
+            await _permissionRepository.DeleteAsync(id);
+        }
+
+        [HttpPut]
+        public async Task Put([FromBody] Permission permission)
+        {
+            //var permissionTask1 = _permissionRepository.UpdateAsync(permission);
+            //return await _permissionRepository.UpdateAsync(permission);
+            await _permissionRepository.UpdateAsync(permission);
+        }
+
+        //[HttpPost]
+        //public async Task<Permission> Post([FromBody] Permission permission)
+        //{
+        //    //var permissionTask1 = _permissionRepository.AddAsync(permission.Id, permission.Name, permission.Description);
+        //    //await permissionTask1;
+        //    //return permissionTask1.Result;
+        //    return await _permissionRepository.AddAsync(permission.Id, permission.Name, permission.Description);
+
+        //}
     }
 }

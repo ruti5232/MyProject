@@ -26,16 +26,42 @@ namespace MyProject.WebAPI.Controllers
 
         [HttpGet]
 
-        public List<Claim> Get()
+        public async Task<List<Claim>> Get()
         {
-            return _claimRepository.GetAll();
+            return await _claimRepository.GetAllAsync();
         }
 
         [HttpGet("{id}")]
 
-        public Claim Get(int id)
+        public async Task<Claim> Get(int id)
         {
-            return _claimRepository.GetById(id);
+            return await _claimRepository.GetByIdAsync(id);
         }
+
+        [HttpDelete("{id}")]
+
+        public async Task Delete(int id)
+        {
+            await _claimRepository.DeleteAsync(id);
+        }
+
+        [HttpPut]
+        public async Task Put([FromBody] Claim claim)
+        {
+            //var claimTask1 = _claimRepository.UpdateAsync(claim);
+            //return await _claimRepository.UpdateAsync(claim);
+            await _claimRepository.UpdateAsync(claim);
+        }
+
+        //[HttpPost]
+        //public async Task<Claim> Post([FromBody] Claim claim)
+        //{
+        //    //var claimTask1 = _claimRepository.AddAsync(claim.Id,claim.RoleId, claim.PermissionId,claim.Policy);
+        //    //await claimTask1;
+        //    //return claimTask1.Result;
+        //    return await _claimRepository.AddAsync(claim.Id, claim.RoleId, claim.PermissionId, claim.Policy);
+
+        //}
+
     }
 }

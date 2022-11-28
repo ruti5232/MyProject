@@ -19,31 +19,30 @@ namespace MyProject.Services.Sevices
         {
              _roleRepository=roleRepository;
             _mapper = mapper;
-
         }
-        public RoleDTO Add(int id, string name, string description)
+        public async Task<RoleDTO> AddAsync(int id, string name, string description)
         {
-            return _mapper.Map<RoleDTO>(_roleRepository.Add(id, name, description));
-        }
-
-        public void Delete(int id)
-        {
-          _roleRepository.Delete(id);
+            return _mapper.Map<RoleDTO>(await _roleRepository.AddAsync(id,name,description));
         }
 
-        public RoleDTO GetById(int id)
+        public async Task DeleteAsync(int id)
         {
-            return _mapper.Map<RoleDTO>(_roleRepository.GetById(id));
+           await _roleRepository.DeleteAsync(id);
         }
 
-        public List<RoleDTO> GetList()
+        public async Task<RoleDTO> GetByIdAsync(int id)
         {
-            return _mapper.Map<List<RoleDTO>>(_roleRepository.GetAll());
+            return _mapper.Map<RoleDTO>(await _roleRepository.GetByIdAsync(id));
         }
 
-        public RoleDTO Update(RoleDTO roleDTO)
+        public async Task<List<RoleDTO>> GetListAsync()
         {
-            return _mapper.Map<RoleDTO>(_roleRepository.Update(_mapper.Map<Role>(roleDTO)));
+            return _mapper.Map<List<RoleDTO>>(await _roleRepository.GetAllAsync());
+        }
+
+        public async Task<RoleDTO> UpdateAsync(RoleDTO roleDTO)
+        {
+            return _mapper.Map<RoleDTO>(await _roleRepository.UpdateAsync(_mapper.Map<Role>(roleDTO)));
         }
 
     }

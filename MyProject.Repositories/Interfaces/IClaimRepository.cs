@@ -9,15 +9,15 @@ namespace MyProject.Repositories.Interfaces
 {
     public interface IClaimRepository
     {
-        public List<Claim> GetAll();
+        public Task<List<Claim>> GetAllAsync();
 
-        public Claim GetById(int id);
+        public Task<Claim> GetByIdAsync(int id);
 
-        public Claim Add(int id, int roleId, int permissionId, EPolicy policy);
+        public Task<Claim> AddAsync(int id, int roleId, int permissionId, EPolicy policy);
 
-        public Claim Update(Claim claim);
+        public Task<Claim> UpdateAsync(Claim claim);
 
-        public void Delete(int id);
+        public Task DeleteAsync(int id);
 
     }
 }
